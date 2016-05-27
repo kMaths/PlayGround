@@ -1,0 +1,105 @@
+#Standart library
+
+x = 1234567
+type(x) /vs. class in R
+xs = str(x)
+xs
+xs[0] /xero base indexing vs. R's 1 base
+xs[:3]
+xs[2:5]
+xs[::2]
+xs[::-1] /reverse
+xs == xs[::-1] /exactly like R
+
+#Function
+
+
+def palindrome(x):
+	"""
+	Take a number x and check if it's a palindrome
+	#wishlist: Document first
+	>>> palindrome(1234)
+	False
+	>>> palindrome(9009)
+	True 
+	"""
+	
+	xs = str(x)
+	return sx == sx[::-1]
+#super awesome!!!
+import doctest
+doctest.test(verbose = True)
+
+palindrome(1234)
+palindrome(9009)
+
+#To slove the Euler problem
+
+largest = 0
+for i in range(1000):
+	for j in range(1000):
+		prod = i * j
+		if palindrome(prod):
+			largest = max(prod, largest)
+return largest
+
+#Now using iterators
+# no extra memory <- produces a generator
+# look up David Beasley
+
+import itertools
+
+pairs = intertools.product(range(1009), range(1000))
+prod = (a * b for a, b in pairs)
+max(x for x in prod if palindrome(x))
+
+
+#Anaconda library
+
+import matplotlib.pyplos as plt
+import numpy as np
+import pandas as pd
+#brings data frame to python, copied from R
+
+#let us plot
+#ipython spacific
+%matplotlib inline
+pts.
+
+apt.pd = read_svs
+apt.shape #str
+apt.iloc[:5, ;4] #slice, similar to head
+apt.dtypes
+#objects is just a python object, so probably string literal
+import seaborn as sns
+sns.lmplot(x, y, data=)
+import statsmodels.formula.api as smf
+smf.ols? # ? before or after vs. R's before
+#if you see mistakes in documentation  you can do a pull reuest in git to help change it. Become part of the community.
+
+#method chaining, it the 'right' order, not the math order
+(pt.loc[:, ['shp_city', 'price']] #all rows, these two columns
+  .groupby('shp_city')
+  .median()
+  .sort)values('price', ascending = False)
+  .head(15
+)
+
+#scrape
+cali = pd.read_html('web adress')
+type(cali)
+len(cali)
+[x.shape for x in cali] #list comprehension
+
+cities = cali[1]
+cities.head()
+
+c2 = cities.iloc[2:, [0,3,4]
+#rendame
+
+#footnotes and commas in HTML
+import re
+#python is great for text processing
+pattern = re.compile(r', []) #filter out this stuff
+
+#lambda is make function
