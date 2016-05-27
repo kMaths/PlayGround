@@ -66,3 +66,26 @@ doc <- htmlTreeParse(fileURL,useInternal = TRUE)
 #li = list items, 
 scores <- xpathSApply(doc,"//li[@class='score']",xmlValue)
 teams <- xpathSApply(doc,"//li[@class='team-name']",xmlValue)
+
+
+
+#Import JSON
+
+library(jsonlite)
+jsonData = fromJSON("https://api.github.com/users/jtleek/repos")
+names(jsonData)
+#data frame in data frame!
+names(jsonData$owner)
+#one for each repo
+jsonData$owner$login
+
+#turn something into jSON
+myjson <- toJSON(iris, pretty = TRUE)
+cat(myjson)
+iris2 <- fromJSON(myjson)
+head(iris2)
+
+#see json.org or
+#r-bloggers.com/new-package-jsonlite-a-smarter-json-encoderdecoder/
+#jsonlite vignette
+
