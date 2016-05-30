@@ -89,3 +89,99 @@ head(iris2)
 #r-bloggers.com/new-package-jsonlite-a-smarter-json-encoderdecoder/
 #jsonlite vignette
 
+
+#data.table package
+#written in c, and very fast; faster than data.frame
+library(data.table)
+
+#Create the same way you would a data.frame
+DF <- data.frame(x=rnorm(9),y=rep(c("a", "b","c"),each=3),z=rnorm(9))
+head(DF,3)
+
+DT <- data.table(x=rnorm(9),y=rep(c("a","b","c"),each=3),z=rnorm(9))
+head(DT,3)
+
+#see all tables in memory
+tables()
+
+#subset rows just like data.frame
+
+DT[2,]
+DT[DT$y=="a",]
+
+#if you don't specify index, it takes rows
+DT[c(2,3)]
+
+#subsetting columns is different from data.frame: uses expersions
+DT[,c(1,2)]
+
+#expressions are between {}
+k={print(10);5}
+print(k)
+
+DT[,list(mean(x),sum(z))]
+DT[,table(y)]
+
+#add w to table, does not make copy of table like data.frame does.
+DT[,w:=z^2]
+head(DT,3)
+
+#be careful because a copy is not made
+DT2 <- DT
+DT[,y:=2]
+head(DT,3)
+head(DT2,3)
+#instead use the copy function
+
+#multiple functions. Note: left to right, not mathematical
+DT[,m:={tmp <- z; log2(tmp+5)}]
+head(DT,3)
+#plyr like operations
+DT[,a:=x>=0]
+head(DT,3)
+
+#grouping
+DT[,b:= mean(x+w), by=a]
+head(DT)
+
+# .N gives you an integer, length 1, containing the number
+# ie, it counts instead of using DT$x
+DT <- data.table(x=sample(letters[1:3],1E5,TRUE))
+DT[,.N, by=x]
+
+#Keys
+DT <- data.table(x=rep(c("a", "b", "c"),each=100),y=rnorm(300))
+setkey(DT,x)
+DT['a']
+
+#Use keys to facilitate joins aka
+#merge
+DT1 <- data.table(x=c("a",'a','b','dt1'), y=1:4)
+DT2 <- data.table(x=c('a','b','dt2'), z=5:7)
+setkey(DT1,x); setkey(DT2,x)
+#merge on keys, so matching 
+merge(DT1,DT2)
+#Question: does merge take cartesian product?
+DT3 <- data.table(x=c('a','a'),y=1:2)
+DT4 <- data.table(x=c('a','a'),y=3:4)
+setkey(DT3,x); setkey(DT4,x)
+merge(DT3,DT4)
+#yes, yes it does
+
+#reading from disk is fast
+big_df <- data.frame(x=rnorm(1E6), y=rnorm(1E6))
+#set up temp file
+file <- tempfile()
+#write data.frame to file
+write.table(big_df, file=file, row.names=FALSE, col.names = FALSE, sep = "\t", quote = FALSE)
+#time how long it takes to read in table. 
+#fread reads in table similar to read.table, but using tab separation
+system.time(fread(file))
+#using data.frame read in command
+system.time(read.table(file, header=TRUE,sep="\t"))
+#need to get solid state hard drive
+#See:
+#https://r-forge.r-project.org/scm/viewvc.php/pkg/NEWS?viewmarkup&root=datatable
+#stackoverflow.com/questions/13618488/what-you-can-do-with-data-frame-that-you-cant-in-data-table
+
+
