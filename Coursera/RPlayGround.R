@@ -1,6 +1,9 @@
-#Coursera Notes aka "PlayGround"
+#Coursera Notes on Getting and Cleaning Data Week 1
 
-#create new file if it doesn't exist
+
+#create new directory if it doesn't exist
+#using dir.create()
+#Create file with file.create or write.table or use as below download.file
 
 if(!file.exists("data")) (
   dir.create("data")
@@ -58,7 +61,7 @@ xpathSApply(rootNode,"//name",xmlValue)
 #gets prices
 xpathSApply(rootNode,"//price",xmlValue)
 
-#right click and selecet "view source" to see xml code on sites
+#right click and select "view source" to see xml code on sites
 
 fileURL = "http://espn.go.com/nfl/team/_/name/bal/baltimore-ravens"
 #use htmlTreeParse when getting html file
@@ -112,7 +115,7 @@ DT[DT$y=="a",]
 #if you don't specify index, it takes rows
 DT[c(2,3)]
 
-#subsetting columns is different from data.frame: uses expersions
+#subsetting columns is different from data.frame: uses expresions
 DT[,c(1,2)]
 
 #expressions are between {}

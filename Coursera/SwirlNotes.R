@@ -1,3 +1,5 @@
+#Notes on swirl's Getting and Cleaning Data
+
 library(swirl)
 #see variable in workspace
 ls()
@@ -135,4 +137,53 @@ View(result3)
 
 
 #Tidying Data with tidyr
+library(tidyr)
+#each variable forms a column
+#each observation forms a row
+#one table per observational unit
 
+
+#Column headers are values, not variables names
+students
+?gather
+#gather() is melting, we minus out colvars)
+
+
+#Multiple variables are stored in one column
+#key is the name of the column we will create to put old column nmaes into
+students2
+#everything but grade with -grade
+res <- gather(students2, sex_class, count, -grade)
+res
+gather(students, sex, count, -grade)
+?separate
+separate(data = res, col = sex_class, into = c("sex", "class"))
+#if you don't specify, separate will separate on non alpha-numeric values.
+submit()
+#you can chain these commands
+
+
+#Variables are stored in both rows and columns.
+students3
+submit()
+?spread
+
+students3 %>%
+  gather(class, grade, class1:class5, na.rm = TRUE) %>%
+  spread(test,grade) %>%
+  mutate(class = extract_numeric(class)) %>%
+  print
+
+extract_numeric('class5')
+
+#Multiple observation units are stored in the same table.
+students4
+submit()
+passed
+failed
+passed <- mutate(passed, status = "passed")
+failed <- mutate(failed, status = "failed")
+bind_rows(passed, failed)
+
+sat
+submit()
