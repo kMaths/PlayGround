@@ -19,6 +19,7 @@ list.files("./data")
 dateDownloaded <- date()
 dateDownloaded
 
+
 #Import from XML
 
 #tags = labels: <start> ends with </start> or <empty tag /> 
