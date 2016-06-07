@@ -133,8 +133,8 @@ names(pg2)
 
 #Reading from apis
 #stands for application programming interface
-myapp = oauth_app("twitter", key = "d6GwQnsNx6BbYNnscLgf9Yngz", secret = "PSestbbZd0eFr7cN9O3ppvJqIACnKsW72LUJcaRECyRrfbEdOp")
-sig = sign_oauth1.0(myapp, token = "733867692554260486-ctupket4Qegke8v4aoft1OBJX1LYJbx", token_secret = "SoxMgESI3dUO1Jb7E9mNO4tvDoBd98Vkm6NYLxkEbEbZV")
+myapp = oauth_app("twitter", key = "key", secret = "secret")
+sig = sign_oauth1.0(myapp, token = "token", token_secret = "token_secret")
 homeTL = GET('https://api.twitter.com/1.1/statuses/home_timeline.json',sig)
 #content recognizes it's json
 library(jsonlite)
