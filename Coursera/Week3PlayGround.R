@@ -148,6 +148,7 @@ cylData
 head(InsectSprays)
 #within each value of spray this will count up the sum of count
 tapply(InsectSprays$count,InsectSprays$spray,sum)
+?tapply
 #split
 spIns = split(InsectSprays$count,InsectSprays$spray)
 spIns
